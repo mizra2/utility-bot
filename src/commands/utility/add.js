@@ -1,3 +1,5 @@
+/* Test Command For Learning Purposes */ 
+
 module.exports = {
 
     description: 'Adds two numbers together',
