@@ -1,0 +1,25 @@
+{
+  "name": "utility-bot",
+  "version": "1.0.0",
+  "description": "A utility bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizra2/utility-bot.git"
+  },
+  "author": "Milad Izra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mizra2/utility-bot/issues"
+  },
+  "homepage": "https://github.com/mizra2/utility-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.0.1",
+    "wokcommands": "^2.1.0"
+  }
+}
