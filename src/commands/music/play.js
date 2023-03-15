@@ -55,7 +55,7 @@ module.exports = {
 
       // TODO: ADD EMBED IF I FEEL LIKE IT LATER
       // Or can keep it simple
-
+    
       return interaction.followUp(
         `**${track.track.title}** has been added to the queue!`
       );

@@ -40,7 +40,7 @@ module.exports = {
 
     // Disconnect
 
-    await queue.disconnect(connection);
+    queue.disconnect(connection);
     // TODO: Embed
     return interaction.reply(
       `Music Bot has been disconnected from ${interaction.member.voice.channel}`
