@@ -1,5 +1,5 @@
-// Test Event IDK // 
+// Test Event IDK //
 
 module.exports = (message, instance) => {
-    console.log(message.content);
-  };
+  console.log(message.content);
+};

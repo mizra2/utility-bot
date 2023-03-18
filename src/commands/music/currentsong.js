@@ -18,11 +18,6 @@ module.exports = {
     if (!userChannel)
       return interaction.reply("You are not connected to a voice channel");
 
-    if (!queue)
-      return interaction.reply(
-        "Bot is not connected to any channel. Try playing something with /play!"
-      );
-
     if (userChannel.id != queue.channel.id) {
       return interaction.reply("You are not connected to the same channel");
     }
