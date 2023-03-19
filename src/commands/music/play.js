@@ -1,5 +1,9 @@
 const { CommandType } = require("wokcommands");
-const { ApplicationCommandOptionType } = require("discord.js");
+const {
+  ApplicationCommandOptionType,
+  EmbedBuilder,
+  userMention,
+} = require("discord.js");
 const { QueryType } = require("discord-player");
 
 module.exports = {
@@ -56,9 +60,57 @@ module.exports = {
       // TODO: ADD EMBED IF I FEEL LIKE IT LATER
       // Or can keep it simple
 
-      return interaction.followUp(
-        `**${track.track.title}** has been added to the queue!`
-      );
+      const embed = new EmbedBuilder();
+
+      // Set URL not working I guess?
+
+      embed
+        .setDescription(
+          `${
+            !track.track.playlist
+              ? `**${track.track.title}** has been added to the queue!`
+              : `Multiple tracks have been added to the queue`
+          }`
+        )
+        .setThumbnail(
+          `${
+            !track.track.playlist
+              ? `${track.track.thumbnail}`
+              : `${track.track.playlist.thumbnail.url}`
+          }`
+        )
+        .setColor(`#FF0000`)
+        .setAuthor({
+          name: interaction.member.displayName,
+          iconURL: interaction.member.user.avatarURL(),
+        })
+        .setTimestamp()
+        .setFields([
+          {
+            name: "Duration",
+            value: `\`${track.track.duration}\``,
+            inline: true,
+          },
+          {
+            name: "Requested By",
+            value: userMention(interaction.member.user.id),
+            inline: true,
+          },
+          {
+            name: "Position",
+            value: `\`${
+              interaction.client.player.nodes
+                .get(interaction.guild.id)
+                .node.getTrackPosition(track.track) < 0
+                ? 0
+                : interaction.client.player.nodes
+                    .get(interaction.guild.id)
+                    .node.getTrackPosition(track.track) + 1
+            }\``,
+          },
+        ]);
+
+      return interaction.editReply({ embeds: [embed] });
     } catch (e) {
       // let's return error if something failed
       console.log(e);

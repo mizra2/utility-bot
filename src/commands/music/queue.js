@@ -1,11 +1,12 @@
+// Shows the current list of music
 const { CommandType } = require("wokcommands");
 const { ApplicationCommandOptionType } = require("discord.js");
 const { QueryType } = require("discord-player");
 
 module.exports = {
-  name: "skip",
+  name: "queue",
 
-  description: "Skip the current song!",
+  description: "Check all the tracks currently in the queue",
 
   slash: true,
 
@@ -18,25 +19,16 @@ module.exports = {
     if (!userChannel)
       return interaction.reply("You are not connected to a voice channel");
 
-    if (!queue)
-      return interaction.reply(
-        "Bot is not connected to any channel. Try playing something with /play!"
-      );
-
     if (userChannel.id != queue.channel.id) {
       return interaction.reply("You are not connected to the same channel");
     }
 
-    if (!queue.node.isPlaying()) {
+    if (!queue || !queue.node.isPlaying()) {
       return interaction.reply(
-        "No current song to skip! Try playing a song using /play!"
+        "No track is currently playing. Try playing something with /play!"
       );
     }
-
-    // TODO: EMBED or maybe not needed?
-
-    queue.node.skip();
-
-    return interaction.reply("Skipped the current song!");
+    const tracks = queue;
+    console.log(tracks.node);
   },
 };
